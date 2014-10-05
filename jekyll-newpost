@@ -2,6 +2,7 @@
 #
 # Create a new Jekyll post with name $1 and fill in the frontmatter.
 #
+# Requires my jekyll-update for filling in datetime for the first time.
 
 layout="post"
 
@@ -23,7 +24,7 @@ date:
 " > "$file_name"
 
 # run my update script on it to fill in datetime
-update "$file_name"
+jekyll-update "$file_name"
 
 # bring it up for editing
 $EDITOR "$file_name"
