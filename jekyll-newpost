@@ -23,8 +23,11 @@ date:
 
 " > "$file_name"
 
-# run my update script on it to fill in datetime
+# fill in 'temporary' datetime (looks nice)
 jekyll-update "$file_name"
 
 # bring it up for editing
 $EDITOR "$file_name"
+
+# fill in datetime again when finished editing
+jekyll-update "$file_name"
