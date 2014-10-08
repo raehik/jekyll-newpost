@@ -12,8 +12,8 @@ else
     post_name="$@"
 fi
 
-# filename takes the shell-friendly version of $post_name (thx me for ezpath)
-file_name="$(date "+%Y-%m-%d")-$(ezpath -s "$post_name").md"
+# filename takes the shell-friendly version of $post_name (thx me for ezstring)
+file_name="$(date "+%Y-%m-%d")-$(ezstring "$post_name").md"
 
 echo "---
 layout: $layout
