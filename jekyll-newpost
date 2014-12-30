@@ -2,9 +2,6 @@
 #
 # Create a new Jekyll post with name $1 and fill in the frontmatter.
 #
-# Requires my jekyll-update for filling in datetime for the first time.
-
-layout="post"
 
 if [ -z "$1" ]; then
     post_name="New post"
@@ -12,22 +9,15 @@ else
     post_name="$@"
 fi
 
-# filename takes the shell-friendly version of $post_name (thx me for ezstring)
+# get shell-friendly version of $post_name (thx me for ezstring)
 file_name="$(date "+%Y-%m-%d")-$(ezstring "$post_name").md"
 
-echo "---
-layout: $layout
-title: \"$post_name\"
-date:
+echo \
+"---
+title: $post_name
 ---
 
-" > "$file_name"
-
-# fill in 'temporary' datetime (looks nice)
-jekyll-update "$file_name"
+" >> "$file_name"
 
 # bring it up for editing
 $EDITOR "$file_name"
-
-# fill in datetime again when finished editing
-jekyll-update "$file_name"
