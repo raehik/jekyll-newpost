@@ -4,20 +4,26 @@
 #
 
 if [ -z "$1" ]; then
-    post_name="New post"
+    title="New post"
 else
-    post_name="$@"
+    title="$@"
 fi
 
 # get shell-friendly version of $post_name (thx me for ezstring)
-file_name="$(date "+%Y-%m-%d")-$(ezstring "$post_name").md"
+filename="$(date "+%Y-%m-%d")-$(ezstring "$title").md"
 
+# insert template
+# Jekyll will won't read the title if it has a colon in it, since YAML
+# uses them for variable definitions or something. You can fix that by
+# enclosing the title in quotes (e.g. title: "Colons: they break
+# things"). However, since that seems to be the only thing YAML gets
+# unhappy about, I don't wrap the title in the template.
 echo \
 "---
-title: $post_name
+title: $title
 ---
 
-" >> "$file_name"
+" >> "$filename"
 
 # bring it up for editing
-$EDITOR "$file_name"
+$EDITOR "$filename"
