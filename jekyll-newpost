@@ -3,14 +3,48 @@
 # Create a new Jekyll post with name $1 and fill in the frontmatter.
 #
 
+usage() {
+    cat <<EOF
+Usage: ${0##*/} [options] title...
+Create a new Jekyll post template and begin editing.
+
+  Options:
+    -w          make a wiki page (no slug or date in filename)
+    -h          display this help message
+EOF
+}
+
+while getopts "wh" opt; do
+    case $opt in
+        w) # wiki template
+            template="wiki"
+            ;;
+        h) # display usage message
+            usage
+            exit 0
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+
+
 if [ -z "$1" ]; then
     title="New post"
 else
     title="$@"
 fi
 
-# get shell-friendly version of $post_name (thx me for ezstring)
-filename="$(date "+%Y-%m-%d")-$(ezstring "$title").md"
+if [[ $template == "wiki" ]]; then
+    filename="${title}.md"
+else
+    # get shell-friendly/slug version of $post_name (thx me for
+    # ezstring)
+    filename="$(date "+%Y-%m-%d")-$(ezstring "$title").md"
+fi
+
+
 
 # insert template
 # Jekyll will won't read the title if it has a colon in it, since YAML
