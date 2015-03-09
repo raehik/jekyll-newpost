@@ -30,7 +30,9 @@ shift $((OPTIND-1))
 
 
 
-if [ -z "$1" ]; then
+frontmatter_ident="---"
+
+if [[ -z "$1" ]]; then
     title="New post"
 else
     title="$@"
@@ -53,9 +55,10 @@ fi
 # things"). However, since that seems to be the only thing YAML gets
 # unhappy about, I don't wrap the title in the template.
 echo \
-"---
+"$frontmatter_ident
 title: $title
----
+date: $(date "+%F %T")
+$frontmatter_ident
 
 " >> "$filename"
 
