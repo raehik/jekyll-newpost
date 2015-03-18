@@ -4,7 +4,7 @@ jekyll-newpost
 *NOTE: This script is now deprecated by my [new-from-template][]
 program.*
 
-[new-from-template: https://github.com/raehik/new-from-template
+[new-from-template]: https://github.com/raehik/new-from-template
 
 Creates a template Jekyll post with frontmatter based on given
 arguments. For example:
